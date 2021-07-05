@@ -15,17 +15,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Infra", "3-Infra", "{308A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Test", "4-Test", "{0BFDC708-62BB-445E-9904-874C15639C6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avanade.SubTCSE.Projeto.Application", "Avanade.SubTCSE.Projeto.Application\Avanade.SubTCSE.Projeto.Application.csproj", "{07E4F0FC-17D2-4F42-8429-58391E1CA3D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avanade.SubTCSE.Projeto.Application", "Avanade.SubTCSE.Projeto.Application\Avanade.SubTCSE.Projeto.Application.csproj", "{07E4F0FC-17D2-4F42-8429-58391E1CA3D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avanade.SubTCSE.Projeto.Domain", "Avanade.SubTCSE.Projeto.Domain\Avanade.SubTCSE.Projeto.Domain.csproj", "{53FE0881-A059-46DE-B85C-9CF2E871F0AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avanade.SubTCSE.Projeto.Domain", "Avanade.SubTCSE.Projeto.Domain\Avanade.SubTCSE.Projeto.Domain.csproj", "{53FE0881-A059-46DE-B85C-9CF2E871F0AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.1-CrossCutting", "3.1-CrossCutting", "{2FBB81BE-5848-4A0F-85B7-721DA34BA06D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.2-Data", "3.2-Data", "{9628955B-CFFD-42AC-8537-EA5134FB51DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avanade.SubTCSE.Projeto.Infra.CrosCutting", "Avanade.SubTCSE.Projeto.Infra.CrosCutting\Avanade.SubTCSE.Projeto.Infra.CrosCutting.csproj", "{2B409E2B-D71B-469F-B3DA-34D876D1F191}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avanade.SubTCSE.Projeto.Infra.CrossCutting", "Avanade.SubTCSE.Projeto.Infra.CrosCutting\Avanade.SubTCSE.Projeto.Infra.CrossCutting.csproj", "{2B409E2B-D71B-469F-B3DA-34D876D1F191}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avanade.SubTCSE.Projeto.Infra.Data", "Avanade.SubTCSE.Projeto.Infra.Data\Avanade.SubTCSE.Projeto.Infra.Data.csproj", "{043F282F-04F7-4128-AB24-3AEBE42A5A32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avanade.SubTCSE.Projeto.Infra.Data", "Avanade.SubTCSE.Projeto.Infra.Data\Avanade.SubTCSE.Projeto.Infra.Data.csproj", "{043F282F-04F7-4128-AB24-3AEBE42A5A32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
