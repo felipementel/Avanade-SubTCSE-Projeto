@@ -7,5 +7,3 @@ namespace Avanade.SubTCSE.Projeto.Domain.Base.Repository.MongoDB
         IMongoCollection<TEntity> GetCollection<TEntity>(string collection);
     }
 }
-
-//ACID
