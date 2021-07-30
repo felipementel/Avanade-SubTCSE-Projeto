@@ -1,0 +1,42 @@
+# ❯ docker-compose -f .\docker-compose.yaml up --build
+
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:4.4.4-bionic
+    restart: always
+    container_name: mongo-avanade
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Abcd1234%
+      MONGO_INITDB_DATABASE: fullstack
+    ports:
+      - "27017:27017"
+    volumes:
+       - /mnt/c/temp/mongo:/data/db    
+    networks: 
+      - mongo-compose-network
+    
+  mongo-express:
+    image: mongo-express:0.54.0
+    restart: always
+    container_name: mongoexp-avanade
+    ports:
+      - 9031:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: avanade-user
+      ME_CONFIG_BASICAUTH_PASSWORD: Abcd1234%
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: Abcd1234%
+    links:
+      - mongo
+    networks: 
+      - mongo-compose-network
+    depends_on: 
+      - mongo
+
+networks: 
+    mongo-compose-network:
+      driver: bridge
