@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Avanade.SubTCSE.Projeto.Application\Avanade.SubTCSE.Projeto.Application.csproj" />
-    <ProjectReference Include="..\Avanade.SubTCSE.Projeto.Infra.CrosCutting\Avanade.SubTCSE.Projeto.Infra.CrossCutting.csproj" />
+    <ProjectReference Include="..\Avanade.SubTCSE.Projeto.Infra.CrossCutting\Avanade.SubTCSE.Projeto.Infra.CrossCutting.csproj" />
   </ItemGroup>
 
 </Project>

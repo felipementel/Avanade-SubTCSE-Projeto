@@ -11,6 +11,14 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
 
         private readonly IEmployeeRoleRepository _employeeRoleRepository;
 
+        public EmployeeRoleService(
+            IValidator<Entities.EmployeeRole> validator,
+            IEmployeeRoleRepository employeeRoleRepository)
+        {
+            _validator = validator;
+            _employeeRoleRepository = employeeRoleRepository;
+        }
+
         public async Task<Entities.EmployeeRole> AddEmployeeRoleAsync(Entities.EmployeeRole employeeRole)
         {
             var validated = await _validator.ValidateAsync(employeeRole, opt =>
@@ -25,7 +33,7 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
                 return employeeRole;
             }
 
-            await _employeeRoleRepository.Add(employeeRole);
+            await _employeeRoleRepository.AddAsync(employeeRole);
 
             return employeeRole;
         }

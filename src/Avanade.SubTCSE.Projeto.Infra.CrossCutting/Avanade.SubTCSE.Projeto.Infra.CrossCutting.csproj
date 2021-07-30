@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Avanade.SubTCSE.Projeto.Application\Avanade.SubTCSE.Projeto.Application.csproj" />
+    <ProjectReference Include="..\Avanade.SubTCSE.Projeto.Infra.Data\Avanade.SubTCSE.Projeto.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>

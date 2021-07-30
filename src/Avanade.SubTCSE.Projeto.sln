@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.1-CrossCutting", "3.1-Cro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.2-Data", "3.2-Data", "{9628955B-CFFD-42AC-8537-EA5134FB51DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avanade.SubTCSE.Projeto.Infra.CrossCutting", "Avanade.SubTCSE.Projeto.Infra.CrosCutting\Avanade.SubTCSE.Projeto.Infra.CrossCutting.csproj", "{2B409E2B-D71B-469F-B3DA-34D876D1F191}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avanade.SubTCSE.Projeto.Infra.CrossCutting", "Avanade.SubTCSE.Projeto.Infra.CrossCutting\Avanade.SubTCSE.Projeto.Infra.CrossCutting.csproj", "{2B409E2B-D71B-469F-B3DA-34D876D1F191}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avanade.SubTCSE.Projeto.Infra.Data", "Avanade.SubTCSE.Projeto.Infra.Data\Avanade.SubTCSE.Projeto.Infra.Data.csproj", "{043F282F-04F7-4128-AB24-3AEBE42A5A32}"
 EndProject

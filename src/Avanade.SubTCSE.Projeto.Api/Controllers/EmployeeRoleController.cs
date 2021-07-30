@@ -1,5 +1,5 @@
 ﻿using Avanade.SubTCSE.Projeto.Application.Dtos.EmployeeRole;
-using Avanade.SubTCSE.Projeto.Application.Services.EmployeeRole;
+using Avanade.SubTCSE.Projeto.Application.Interfaces.EmployeeRole;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
@@ -13,14 +13,20 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers
     [ApiExplorerSettings(GroupName = "v1")]
     public class EmployeeRoleController : ControllerBase
     {
-        [HttpPost(Name ="EmployeeRole")]
+        private readonly IEmployeeRoleAppService _employeeRoleAppService;
+
+        public EmployeeRoleController(IEmployeeRoleAppService employeeRoleAppService)
+        {
+            _employeeRoleAppService = employeeRoleAppService;
+        }
+
+        [HttpPost(Name = "EmployeeRole")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateEmployeeRole([FromBody] EmployeeRoleDto employeeRoleDto)
         {
-            EmployeeRoleAppService employeeRoleAppService = new EmployeeRoleAppService();
-            var item = await employeeRoleAppService.AddEmployeeRoleAsync(employeeRoleDto);
+            var item = await _employeeRoleAppService.AddEmployeeRoleAsync(employeeRoleDto);
 
             if (!item.ValidationResult.IsValid)
             {
