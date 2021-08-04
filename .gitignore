@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+## create by Felipe
+src/.sonarqube
+
 # User-specific files
 *.rsuser
 *.suo

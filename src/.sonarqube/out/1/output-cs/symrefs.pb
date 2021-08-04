@@ -1,113 +1,123 @@
-¶
-jD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Aggregates\BaseEntity.cs
+¿
+|D:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Application\AutoMapperConfigs\Profiles\Configs.cs
 
- 
-   
+ 
 
- 
+5 E(
+		/ 2   ˆ
+ïD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Application\AutoMapperConfigs\Profiles\EmployeeRole\EmployeeRoleProfile.cs
 
-		  0ã
-ÇD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Aggregates\EmployeeRole\Entities\EmployeeRole.cs
+ $
 
- 
-
- 
-# % 
-. 6 
-   
-
- 
-# + ©
-öD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Aggregates\EmployeeRole\Interfaces\Repository\IEmployeeRoleRepository.cs
-
- ,º
-ïD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Aggregates\EmployeeRole\Interfaces\Services\IEmployeeRoleService.cs
-
- )
-
-$ 8
-
-O [ƒ
-âD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Aggregates\EmployeeRole\Services\EmployeeRoleService.cs
-
- $
+ "
 
 
-; E" ,
-1 H )
-
-1 EF
-\ h; G   #. : 
- , 5
-I L æ
-çD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Aggregates\EmployeeRole\Validators\EmployeeRoleValidator.cs
-
- &
-
- $
-  ú
-zD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Aggregates\Employee\Entities\Employee.cs
-
- 
-
- 
-  !
-		  
+* -
+
+1 4
 
 
-  
-  
-  
-/ ; '
-  
-  
-   
-  
-  
-!!2 > £
-îD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Aggregates\Employee\Interfaces\Repositories\IEmployeeRepository.cs
+= @
+
+D G
+ # '
+7 :> A
+J MQ T
+ # '
+/ 26 9
+B EI L
+$ %) *Ä
+çD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Application\AutoMapperConfigs\Profiles\Employee\EmployeeProfile.cs
 
- (¥
-çD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Aggregates\Employee\Interfaces\Services\IEmployeeService.cs
+  
 
- %
+ F
+
+
+! %# '! %" &  $  $k o
+
+
+' *& )
+$ %) *
+ # '
+7 :> A
+J MQ T
+ # '
+6 9= @
+I LP S
+ # '
+3 6: =
+F IM P
+ # '
+5 8< ?
+H KO R
+ # '
+/ 26 9
+B EI L
+ # '
+1 48 ;
+D GK N
+ # '
+/ 26 9
+B EI L
+$ %) *ë
+kD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Application\Dtos\Base\BaseDto.cs
 
-  +
+ !
 
-> F®
-ÅD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Aggregates\Employee\Services\EmployeeService.cs
+ #
 
-  
+		  0ï
+{D:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Application\Dtos\EmployeeRole\EmployeeRoleDto.cs
 
-		- 8
+  
 
-		K S‚
-ÖD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Aggregates\Employee\Validators\EmployeeValidator.cs
+ …
+sD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Application\Dtos\Employee\EmployeeDto.cs
 
- "
+ 
 
-  
-  
-  
-  Ü
-tD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Base\Repository\IBaseRepository.cs
+ "
 
- $2
-% , 		 		 ! 
-. 1# & "
+
+
+ 
 
-		 
+ #
 
-		" (
+ 
 
- 
+ 
 
-# %∏
-|D:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Domain\Base\Repository\MongoDB\IMongoDBContext.cs
+, 1∞
+âD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Application\Interfaces\EmployeeRole\IEmployeeRoleAppService.cs
 
- $
-0 7  
+ ,
 
-" /
+ 2
 
-@ J
+C R®
+ÅD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Application\Interfaces\Employee\IEmployeeAppService.cs
+
+ (
+
+ *
+
+7 B˚
+ÜD:\Avanade-Treinamento\Avanade-SubTCSE-Projeto\src\Avanade.SubTCSE.Projeto.Application\Services\EmployeeRole\EmployeeRoleAppService.cs
+
+
+
+ '(
+! (  $ !
+. B   1
+
+ %
+. 4 
+K ^# 6
+
++ ?
+P _p 
+ G Q
+ m q
+ "" 

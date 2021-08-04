@@ -4,17 +4,17 @@ version: '3.8'
 
 services:
   mongo:
-    image: mongo:4.4.4-bionic
+    image: mongo:5.0.1-focal
     restart: always
     container_name: mongo-avanade
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: Abcd1234%
+      MONGO_INITDB_ROOT_PASSWORD: avanade-password
       MONGO_INITDB_DATABASE: fullstack
     ports:
       - "27017:27017"
     volumes:
-       - /mnt/c/temp/mongo:/data/db    
+       - /mnt/c/temp/mongo2:/data/db
     networks: 
       - mongo-compose-network
     
@@ -29,7 +29,7 @@ services:
       ME_CONFIG_BASICAUTH_PASSWORD: Abcd1234%
       ME_CONFIG_MONGODB_PORT: 27017
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: Abcd1234%
+      ME_CONFIG_MONGODB_ADMINPASSWORD: avanade-password
     links:
       - mongo
     networks: 
