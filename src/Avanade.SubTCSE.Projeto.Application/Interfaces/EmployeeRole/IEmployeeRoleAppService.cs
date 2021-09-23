@@ -1,15 +1,14 @@
-﻿using Avanade.SubTCSE.Projeto.Application.Dtos.EmployeeRole;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Avanade.SubTCSE.Projeto.Application.Interfaces.EmployeeRole
 {
     public interface IEmployeeRoleAppService
     {
-        Task<EmployeeRoleDto> AddEmployeeRoleAsync(EmployeeRoleDto employeeRoleDto);
+        Task<Dtos.EmployeeRole.EmployeeRoleDto> AddEmployeeRole(Application.Dtos.EmployeeRole.EmployeeRoleDto employeeRoleDto);
 
-        Task<List<EmployeeRoleDto>> FindAllEmployeeRoleAsync();
+        Task<Dtos.EmployeeRole.EmployeeRoleDto> GetEmployeeRole(string id);
 
-        Task<EmployeeRoleDto> GetById(string id); //TODO: Generics
+        Task<List<Dtos.EmployeeRole.EmployeeRoleDto>> ListEmployeeRole();
     }
 }

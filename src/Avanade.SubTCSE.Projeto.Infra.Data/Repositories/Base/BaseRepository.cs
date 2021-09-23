@@ -11,34 +11,46 @@ namespace Avanade.SubTCSE.Projeto.Infra.Data.Repositories.Base
     public abstract class BaseRepository<TEntity, Tid>
         : IBaseRepository<TEntity, Tid> where TEntity : BaseEntity<Tid>
     {
-        private readonly IMongoCollection<TEntity> _collection;
+        public readonly IMongoCollection<TEntity> _collection;
 
-        protected BaseRepository(IMongoDBContext mongoDBContext, string collectioName)
+        protected BaseRepository(IMongoDBContext context, string collectionName)
         {
-            _collection = mongoDBContext.GetCollection<TEntity>(collectioName);
+            _collection = context.GetCollection<TEntity>(collection: collectionName);
         }
 
-        public virtual async Task<TEntity> AddAsync(TEntity entity)
+        public virtual async Task<TEntity> Add(TEntity entity)
         {
             await _collection.InsertOneAsync(entity);
 
             return entity;
         }
 
-        public async Task<List<TEntity>> FindAllAsync()
+        public virtual void Update(TEntity entity)
         {
-            var all = await _collection.FindAsync(new BsonDocument());
+            var filter = Builders<TEntity>.Filter.Eq(id => id.Id, entity.Id);
 
-            return await all.ToListAsync();
+            _collection.ReplaceOneAsync(filter: filter, replacement: entity);
         }
 
-        public async Task<TEntity> FindByIdAsync(Tid Id)
+        public virtual void Delete(Tid id)
         {
-            var filter = Builders<TEntity>.Filter.Eq("_id", Id);
+            _collection.DeleteOneAsync(Builders<TEntity>.Filter.Eq(field: "_id", id));
+        }
 
-            var resultado = await _collection.FindAsync(filter);
+        public virtual async Task<TEntity> FindById(Tid id)
+        {
+            FilterDefinition<TEntity> filter = Builders<TEntity>.Filter.Eq(field: "_id", id);
 
-            return resultado.FirstOrDefault();
+            var item = await _collection.FindAsync(filter: filter);
+
+            return item.FirstOrDefault();
+        }
+
+        public virtual async Task<IEnumerable<TEntity>> FindAll()
+        {
+            var all = await _collection.FindAsync(filter: new BsonDocument());
+
+            return await all.ToListAsync();
         }
     }
 }

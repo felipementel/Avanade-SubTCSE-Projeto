@@ -3,17 +3,13 @@ using FluentValidation;
 
 namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Validators
 {
-    public class EmployeeValidator : AbstractValidator<Entities.Employee>
+    public class EmployeeValidator : AbstractValidator<Domain.Aggregates.Employee.Entities.Employee>
     {
         public EmployeeValidator()
         {
-            RuleSet("new", () => 
+            RuleSet("new", () =>
             {
                 RuleFor(e => e.FirstName)
-                .NotEmpty()
-                .WithMessage("{PropertyName} can not be empty");
-
-                RuleFor(e => e.SurName)
                 .NotEmpty()
                 .WithMessage("{PropertyName} can not be empty");
 
