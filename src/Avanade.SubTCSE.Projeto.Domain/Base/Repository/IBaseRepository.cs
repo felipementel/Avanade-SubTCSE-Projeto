@@ -4,15 +4,16 @@ using System.Threading.Tasks;
 
 namespace Avanade.SubTCSE.Projeto.Domain.Base.Repository
 {
-    public interface IBaseRepository<TEntity, Tid>
-        where TEntity : BaseEntity<Tid>
+    public interface IBaseRepository<TEntity, Tid> where TEntity : BaseEntity<Tid>
     {
-        Task<TEntity> AddAsync(TEntity entity);
+        Task<TEntity> Add(TEntity entity);
 
-        Task<TEntity> FindByIdAsync(Tid Id);
+        void Update(TEntity entity);
 
-        Task<List<TEntity>> FindAllAsync();
+        void Delete(Tid id);
 
-        //TODO: IEnumerable, IList, List
+        Task<TEntity> FindById(Tid id);
+
+        Task<IEnumerable<TEntity>> FindAll();
     }
 }

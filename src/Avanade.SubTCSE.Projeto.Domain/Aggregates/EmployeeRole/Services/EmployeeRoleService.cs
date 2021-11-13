@@ -1,6 +1,7 @@
-﻿using Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Interfaces.Repository;
+﻿using Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Interfaces.Repositories;
 using Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Interfaces.Services;
 using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,45 +9,48 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
 {
     public class EmployeeRoleService : IEmployeeRoleService
     {
-        private readonly IValidator<Entities.EmployeeRole> _validator;
+        private readonly IValidator<EmployeeRole.Entities.EmployeeRole> _validations;
 
         private readonly IEmployeeRoleRepository _employeeRoleRepository;
 
         public EmployeeRoleService(
-            IValidator<Entities.EmployeeRole> validator,
+            IValidator<Entities.EmployeeRole> validations,
             IEmployeeRoleRepository employeeRoleRepository)
         {
-            _validator = validator;
+            _validations = validations;
             _employeeRoleRepository = employeeRoleRepository;
         }
 
-        public async Task<Entities.EmployeeRole> AddEmployeeRoleAsync(Entities.EmployeeRole employeeRole)
+        public async Task<EmployeeRole.Entities.EmployeeRole> AddEmployeeRole(EmployeeRole.Entities.EmployeeRole employeeRole)
         {
-            var validated = await _validator.ValidateAsync(employeeRole, opt =>
+            if (_validations == null)
+                throw new ArgumentException($"Não foi informado o validador da classe {nameof(employeeRole)}");
+
+            var validated = await _validations.ValidateAsync(employeeRole, opt =>
             {
                 opt.IncludeRuleSets("new");
             });
 
             employeeRole.ValidationResult = validated;
 
-            if (!employeeRole.ValidationResult.IsValid)
+            if (!validated.IsValid)
             {
                 return employeeRole;
             }
 
-            await _employeeRoleRepository.AddAsync(employeeRole);
+            await _employeeRoleRepository.Add(employeeRole);
 
             return employeeRole;
         }
 
-        public async Task<List<Entities.EmployeeRole>> GetAllAsync()
+        public Task<Entities.EmployeeRole> GetEmployeeRole(string id)
         {
-            return await _employeeRoleRepository.FindAllAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task<Entities.EmployeeRole> GetById(string Id)
+        public Task<List<Entities.EmployeeRole>> ListEmployeeRole()
         {
-            return await _employeeRoleRepository.FindByIdAsync(Id);
+            throw new NotImplementedException();
         }
     }
 }
