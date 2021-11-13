@@ -19,7 +19,7 @@ namespace Avanade.SubTCSE.Projeto.Application.Services.EmployeeRole
             _employeeService = employeeService;
         }
 
-        public async Task<EmployeeRoleDto> AddEmployeeRole(EmployeeRoleDto employeeRoleDto)
+        public async Task<EmployeeRoleDto> AddEmployeeRoleAsync(EmployeeRoleDto employeeRoleDto)
         {
             var itemDomain = _mapper.Map<EmployeeRoleDto, Domain.Aggregates.EmployeeRole.Entities.EmployeeRole>(employeeRoleDto);
 
@@ -28,12 +28,22 @@ namespace Avanade.SubTCSE.Projeto.Application.Services.EmployeeRole
             return _mapper.Map<Domain.Aggregates.EmployeeRole.Entities.EmployeeRole, EmployeeRoleDto>(item);
         }
 
-        public Task<EmployeeRoleDto> GetEmployeeRole(string id)
+        public Task DeleteEmployeeRoleAsync(string id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<List<EmployeeRoleDto>> ListEmployeeRole()
+        public Task<EmployeeRoleDto> GetEmployeeRoleAsync(string id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<List<EmployeeRoleDto>> ListEmployeeRoleAsync()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<EmployeeRoleDto> UpdateEmployeeRoleAsync(string id, EmployeeRoleDto employeeRoleDto)
         {
             throw new System.NotImplementedException();
         }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <ApplicationInsightsResourceId>/subscriptions/f4574f09-7fab-45bd-8eb5-508b8c6aa04a/resourceGroups/rg-avanade-subtcse-projeto-dev/providers/microsoft.insights/components/appi-subtcse-projeto-dev</ApplicationInsightsResourceId>
     <UserSecretsId>0f08af28-8029-4ec7-a8a4-7416380c170c</UserSecretsId>
