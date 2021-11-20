@@ -107,7 +107,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         {
             await _employeeRoleAppService.DeleteEmployeeRoleAsync(id);
 
-            return NoContent()
+            return NoContent();
         }
     }
 }

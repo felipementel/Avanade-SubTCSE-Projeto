@@ -23,21 +23,21 @@ namespace Avanade.SubTCSE.Projeto.Application.Services.Employee
         {
             var itemDomain = _mapper.Map<EmployeeDto, Domain.Aggregates.Employee.Entities.Employee>(employeeDto);
 
-            var item = await _employeeService.AddEmployee(itemDomain);
+            var item = await _employeeService.AddEmployeeAsync(itemDomain);
 
             return _mapper.Map<Domain.Aggregates.Employee.Entities.Employee, EmployeeDto>(item);
         }
 
         public async Task<EmployeeDto> GetEmployee(string id)
         {
-            var item = await _employeeService.GetEmployee(id);
+            var item = await _employeeService.GetEmployeeAsync(id);
 
             return _mapper.Map<Domain.Aggregates.Employee.Entities.Employee, EmployeeDto>(item);
         }
 
         public async Task<List<EmployeeDto>> ListEmployee()
         {
-            var item = await _employeeService.ListEmployee();
+            var item = await _employeeService.ListEmployeeAsync();
 
             return _mapper.Map<List<Domain.Aggregates.Employee.Entities.Employee>, List<EmployeeDto>>(item);
         }

@@ -18,35 +18,35 @@ namespace Avanade.SubTCSE.Projeto.Infra.Data.Repositories.Base
             _collection = context.GetCollection<TEntity>(collection: collectionName);
         }
 
-        public virtual async Task<TEntity> Add(TEntity entity)
+        public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
             await _collection.InsertOneAsync(entity);
 
             return entity;
         }
 
-        public virtual void Update(TEntity entity)
+        public virtual Task UpdateAsync(TEntity entity)
         {
             var filter = Builders<TEntity>.Filter.Eq(id => id.Id, entity.Id);
 
-            _collection.ReplaceOneAsync(filter: filter, replacement: entity);
+            return _collection.ReplaceOneAsync(filter: filter, replacement: entity);
         }
 
-        public virtual void Delete(Tid id)
+        public virtual Task DeleteAsync(Tid id)
         {
-            _collection.DeleteOneAsync(Builders<TEntity>.Filter.Eq(field: "_id", id));
+            return _collection.DeleteOneAsync(Builders<TEntity>.Filter.Eq(field: "_id", id));
         }
 
-        public virtual async Task<TEntity> FindById(Tid id)
+        public virtual async Task<TEntity> FindByIdAsync(Tid id)
         {
             FilterDefinition<TEntity> filter = Builders<TEntity>.Filter.Eq(field: "_id", id);
 
             var item = await _collection.FindAsync(filter: filter);
 
-            return item.FirstOrDefault();
+            return await item.FirstOrDefaultAsync();
         }
 
-        public virtual async Task<IEnumerable<TEntity>> FindAll()
+        public virtual async Task<List<TEntity>> FindAllAsync()
         {
             var all = await _collection.FindAsync(filter: new BsonDocument());
 
