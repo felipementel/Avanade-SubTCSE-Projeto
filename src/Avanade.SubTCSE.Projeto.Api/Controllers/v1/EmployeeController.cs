@@ -33,7 +33,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAll()
         {
-            var item = await _employeeAppService.ListEmployee();
+            var item = await _employeeAppService.ListEmployeeAsync();
 
             if (!item.Any())
             {
@@ -50,7 +50,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetById(string id)
         {
-            var item = await _employeeAppService.GetEmployee(id);
+            var item = await _employeeAppService.GetEmployeeAsync(id);
 
             if (item != null)
             {
@@ -65,9 +65,11 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         [ProducesResponseType(typeof(EmployeeDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Employee([FromBody] EmployeeDto employeeDto, ApiVersion apiVersion)
+        public async Task<IActionResult> Employee(
+            [FromBody] EmployeeDto employeeDto, 
+            ApiVersion apiVersion)
         {
-            var item = await _employeeAppService.AddEmployee(employeeDto);
+            var item = await _employeeAppService.AddEmployeeAsync(employeeDto);
 
             if (!item.ValidationResult.IsValid)
             {
@@ -79,6 +81,38 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
                 apiVersion = apiVersion.ToString(),
                 id = item.Identificador
             });
+        }
+
+        [HttpPut("Employee/{id}")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(EmployeeDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> EmployeeRole(
+            string id,
+            [FromBody] EmployeeDto employeeRoleDto,
+            ApiVersion apiVersion)
+        {
+            var item = await _employeeAppService.UpdateEmployeeAsync(id, employeeRoleDto);
+
+            if (!item.ValidationResult.IsValid)
+            {
+                return BadRequest(string.Join('\n', item.ValidationResult.Errors));
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("EmployeeRole/{id}")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(EmployeeDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> EmployeeRole(string id, ApiVersion apiVersion)
+        {
+            await _employeeAppService.DeleteEmployeeAsync(id);
+
+            return NoContent();
         }
     }
 }
