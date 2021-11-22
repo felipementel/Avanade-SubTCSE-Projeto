@@ -5,10 +5,14 @@ namespace Avanade.SubTCSE.Projeto.Application.Interfaces.Employee
 {
     public interface IEmployeeAppService
     {
-        Task<Dtos.Employee.EmployeeDto> AddEmployee(Dtos.Employee.EmployeeDto employeeDto);
+        Task<Dtos.Employee.EmployeeDto> AddEmployeeAsync(Dtos.Employee.EmployeeDto employeeDto);
 
-        Task<Dtos.Employee.EmployeeDto> GetEmployee(string id);
+        Task<Dtos.Employee.EmployeeDto> GetEmployeeAsync(string id);
 
-        Task<List<Dtos.Employee.EmployeeDto>> ListEmployee();
+        Task<List<Dtos.Employee.EmployeeDto>> ListEmployeeAsync();
+
+        Task<Dtos.Employee.EmployeeDto> UpdateEmployeeAsync(string id, Application.Dtos.Employee.EmployeeDto employeeDto);
+
+        Task DeleteEmployeeAsync(string id);
     }
 }

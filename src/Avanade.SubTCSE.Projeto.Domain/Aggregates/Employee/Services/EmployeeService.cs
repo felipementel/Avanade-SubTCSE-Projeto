@@ -41,24 +41,46 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Services
             return await _employeeRepository.AddAsync(employee);
         }
 
-        public Task DeleteEmployeeRoleAsyncAsync(string id)
+        public async Task DeleteEmployeeAsync(string id)
         {
-            throw new NotImplementedException();
+            await _employeeRepository.DeleteAsync(id);
         }
 
-        public Task<Entities.Employee> GetEmployeeAsync(string id)
+        public async Task<Entities.Employee> GetEmployeeAsync(string id)
         {
-            throw new NotImplementedException();
+            return await _employeeRepository.FindByIdAsync(id);
         }
 
-        public Task<List<Entities.Employee>> ListEmployeeAsync()
+        public async Task<List<Entities.Employee>> ListEmployeeAsync()
         {
-            throw new NotImplementedException();
+            return await _employeeRepository.FindAllAsync();
         }
 
-        public Task UpdateEmployeeRoleAsync(string id, Entities.Employee employee)
+        public async Task<Entities.Employee> UpdateEmployeeAsync(string id, Entities.Employee employee)
         {
-            throw new NotImplementedException();
+            var item = await _employeeRepository.FindByIdAsync(id);
+
+            if (item is not null)
+            {
+                var newItem = item with
+                {
+                    FirstName = employee.FirstName,
+                    Surname = employee.Surname,
+                    Active = employee.Active,
+                    Birthday = employee.Birthday,
+                    EmployeeRole = employee.EmployeeRole,
+                    Salary = employee.Salary                    
+                };
+
+                await _employeeRepository.UpdateAsync(newItem);
+
+                return newItem;
+            }
+            else
+            {
+                //TODO: Return Validation Result
+                return employee;
+            }
         }
     }
 }

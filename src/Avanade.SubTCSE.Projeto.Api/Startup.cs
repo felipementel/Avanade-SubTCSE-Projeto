@@ -36,7 +36,6 @@ namespace Avanade.SubTCSE.Projeto.Api
             _environment = environment;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services
@@ -130,8 +129,10 @@ namespace Avanade.SubTCSE.Projeto.Api
                 .AddInMemoryStorage();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
+        public void Configure(
+            IApplicationBuilder app, 
+            IWebHostEnvironment env, 
+            IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
             {
@@ -150,7 +151,10 @@ namespace Avanade.SubTCSE.Projeto.Api
                                 var exceptionObject = context.Features.Get<IExceptionHandlerFeature>();
                                 if (null != exceptionObject)
                                 {
-                                    var errorMessage = $"<b>Error: {exceptionObject.Error.Message}</b> { exceptionObject.Error.StackTrace}";
+                                    var errorMessage = $"<b>Error:" +
+                                    $" {exceptionObject.Error.Message}</b>" +
+                                    $" { exceptionObject.Error.StackTrace}";
+
                                     await context.Response.WriteAsync(errorMessage).ConfigureAwait(false);
                                 }
                             });

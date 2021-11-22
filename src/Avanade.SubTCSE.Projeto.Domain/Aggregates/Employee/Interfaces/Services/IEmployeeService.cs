@@ -11,8 +11,8 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Interfaces.Services
 
         Task<List<Entities.Employee>> ListEmployeeAsync();
 
-        Task UpdateEmployeeRoleAsync(string id, Entities.Employee employee);
+        Task<Entities.Employee> UpdateEmployeeAsync(string id, Entities.Employee employee);
 
-        Task DeleteEmployeeRoleAsyncAsync(string id);
+        Task DeleteEmployeeAsync(string id);
     }
 }

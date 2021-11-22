@@ -65,7 +65,9 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Employee([FromBody] EmployeeRoleDto employeeRoleDto, ApiVersion apiVersion)
+        public async Task<IActionResult> EmployeeRole(
+            [FromBody] EmployeeRoleDto employeeRoleDto, 
+            ApiVersion apiVersion)
         {
             var item = await _employeeRoleAppService.AddEmployeeRoleAsync(employeeRoleDto);
 
@@ -86,7 +88,10 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Employee(string id, [FromBody] EmployeeRoleDto employeeRoleDto, ApiVersion apiVersion)
+        public async Task<IActionResult> EmployeeRole(
+            string id, 
+            [FromBody] EmployeeRoleDto employeeRoleDto,
+            ApiVersion apiVersion)
         {
             var item = await _employeeRoleAppService.UpdateEmployeeRoleAsync(id, employeeRoleDto);
 
@@ -103,7 +108,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Employee(string id, ApiVersion apiVersion)
+        public async Task<IActionResult> EmployeeRole(string id, ApiVersion apiVersion)
         {
             await _employeeRoleAppService.DeleteEmployeeRoleAsync(id);
 
