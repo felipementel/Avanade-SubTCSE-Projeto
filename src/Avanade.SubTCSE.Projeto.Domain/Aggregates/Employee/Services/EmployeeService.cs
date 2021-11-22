@@ -1,6 +1,5 @@
 ﻿using Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Interfaces.Repositories;
 using Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Interfaces.Services;
-using Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Interfaces.Repositories;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Services
     {
         private readonly IValidator<Employee.Entities.Employee> _validations;
 
-        private readonly IEmployeeRepository _employeeRepository; 
+        private readonly IEmployeeRepository _employeeRepository;
 
         public EmployeeService(
             IValidator<Entities.Employee> validations,
@@ -22,7 +21,7 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Services
             _employeeRepository = employeeRepository;
         }
 
-        public async Task<Entities.Employee> AddEmployee(Entities.Employee employee)
+        public async Task<Entities.Employee> AddEmployeeAsync(Entities.Employee employee)
         {
             if (_validations == null)
                 throw new ArgumentException($"Não foi informado o validador da classe {nameof(employee)}");
@@ -39,17 +38,49 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Services
                 return employee;
             }
 
-            return await _employeeRepository.Add(employee);
+            return await _employeeRepository.AddAsync(employee);
         }
 
-        public Task<Entities.Employee> GetEmployee(string id)
+        public async Task DeleteEmployeeAsync(string id)
         {
-            throw new NotImplementedException();
+            await _employeeRepository.DeleteAsync(id);
         }
 
-        public Task<List<Entities.Employee>> ListEmployee()
+        public async Task<Entities.Employee> GetEmployeeAsync(string id)
         {
-            throw new NotImplementedException();
+            return await _employeeRepository.FindByIdAsync(id);
+        }
+
+        public async Task<List<Entities.Employee>> ListEmployeeAsync()
+        {
+            return await _employeeRepository.FindAllAsync();
+        }
+
+        public async Task<Entities.Employee> UpdateEmployeeAsync(string id, Entities.Employee employee)
+        {
+            var item = await _employeeRepository.FindByIdAsync(id);
+
+            if (item is not null)
+            {
+                var newItem = item with
+                {
+                    FirstName = employee.FirstName,
+                    Surname = employee.Surname,
+                    Active = employee.Active,
+                    Birthday = employee.Birthday,
+                    EmployeeRole = employee.EmployeeRole,
+                    Salary = employee.Salary                    
+                };
+
+                await _employeeRepository.UpdateAsync(newItem);
+
+                return newItem;
+            }
+            else
+            {
+                //TODO: Return Validation Result
+                return employee;
+            }
         }
     }
 }

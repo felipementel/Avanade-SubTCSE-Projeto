@@ -23,29 +23,37 @@ namespace Avanade.SubTCSE.Projeto.Application.Services.EmployeeRole
         {
             var itemDomain = _mapper.Map<EmployeeRoleDto, Domain.Aggregates.EmployeeRole.Entities.EmployeeRole>(employeeRoleDto);
 
-            var item = await _employeeService.AddEmployeeRole(itemDomain);
+            var item = await _employeeService.AddEmployeeRoleAsync(itemDomain);
 
             return _mapper.Map<Domain.Aggregates.EmployeeRole.Entities.EmployeeRole, EmployeeRoleDto>(item);
         }
 
-        public Task DeleteEmployeeRoleAsync(string id)
+        public async Task DeleteEmployeeRoleAsync(string id)
         {
-            throw new System.NotImplementedException();
+            await _employeeService.DeleteEmployeeRoleAsync(id);
         }
 
-        public Task<EmployeeRoleDto> GetEmployeeRoleAsync(string id)
+        public async Task<EmployeeRoleDto> GetEmployeeRoleAsync(string id)
         {
-            throw new System.NotImplementedException();
+            var item = await _employeeService.GetEmployeeRoleAsync(id);
+
+            return _mapper.Map<Domain.Aggregates.EmployeeRole.Entities.EmployeeRole, EmployeeRoleDto>(item);
         }
 
-        public Task<List<EmployeeRoleDto>> ListEmployeeRoleAsync()
+        public async Task<List<EmployeeRoleDto>> ListEmployeeRoleAsync()
         {
-            throw new System.NotImplementedException();
+            var item = await _employeeService.ListEmployeeRoleAsync();
+
+            return _mapper.Map<List<Domain.Aggregates.EmployeeRole.Entities.EmployeeRole>, List<EmployeeRoleDto>>(item);
         }
 
-        public Task<EmployeeRoleDto> UpdateEmployeeRoleAsync(string id, EmployeeRoleDto employeeRoleDto)
+        public async Task<EmployeeRoleDto> UpdateEmployeeRoleAsync(string id, EmployeeRoleDto employeeRoleDto)
         {
-            throw new System.NotImplementedException();
+            var itemDomain = _mapper.Map<EmployeeRoleDto, Domain.Aggregates.EmployeeRole.Entities.EmployeeRole>(employeeRoleDto);
+
+            var itemUpdated = await _employeeService.UpdateEmployeeRoleAsync(id, itemDomain);
+
+            return _mapper.Map<Domain.Aggregates.EmployeeRole.Entities.EmployeeRole, EmployeeRoleDto>(itemUpdated);
         }
     }
 }

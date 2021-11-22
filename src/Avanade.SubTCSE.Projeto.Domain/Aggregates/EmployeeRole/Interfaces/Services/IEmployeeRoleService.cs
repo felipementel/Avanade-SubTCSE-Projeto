@@ -5,10 +5,14 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Interfaces.Serv
 {
     public interface IEmployeeRoleService
     {
-        Task<Entities.EmployeeRole> AddEmployeeRole(Entities.EmployeeRole employeeRole);
+        Task<Entities.EmployeeRole> AddEmployeeRoleAsync(Entities.EmployeeRole employeeRole);
 
-        Task<Entities.EmployeeRole> GetEmployeeRole(string id);
+        Task<Entities.EmployeeRole> GetEmployeeRoleAsync(string id);
 
-        Task<List<Entities.EmployeeRole>> ListEmployeeRole();
+        Task<List<Entities.EmployeeRole>> ListEmployeeRoleAsync();
+
+        Task<Entities.EmployeeRole> UpdateEmployeeRoleAsync(string id, Entities.EmployeeRole employeeRole);
+
+        Task DeleteEmployeeRoleAsync(string id);
     }
 }

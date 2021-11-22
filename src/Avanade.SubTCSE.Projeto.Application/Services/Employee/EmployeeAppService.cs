@@ -19,27 +19,41 @@ namespace Avanade.SubTCSE.Projeto.Application.Services.Employee
             _employeeService = employeeService;
         }
 
-        public async Task<EmployeeDto> AddEmployee(EmployeeDto employeeDto)
+        public async Task<EmployeeDto> AddEmployeeAsync(EmployeeDto employeeDto)
         {
             var itemDomain = _mapper.Map<EmployeeDto, Domain.Aggregates.Employee.Entities.Employee>(employeeDto);
 
-            var item = await _employeeService.AddEmployee(itemDomain);
+            var item = await _employeeService.AddEmployeeAsync(itemDomain);
 
             return _mapper.Map<Domain.Aggregates.Employee.Entities.Employee, EmployeeDto>(item);
         }
 
-        public async Task<EmployeeDto> GetEmployee(string id)
+        public async Task DeleteEmployeeAsync(string id)
         {
-            var item = await _employeeService.GetEmployee(id);
+            await _employeeService.DeleteEmployeeAsync(id);
+        }
+
+        public async Task<EmployeeDto> GetEmployeeAsync(string id)
+        {
+            var item = await _employeeService.GetEmployeeAsync(id);
 
             return _mapper.Map<Domain.Aggregates.Employee.Entities.Employee, EmployeeDto>(item);
         }
 
-        public async Task<List<EmployeeDto>> ListEmployee()
+        public async Task<List<EmployeeDto>> ListEmployeeAsync()
         {
-            var item = await _employeeService.ListEmployee();
+            var item = await _employeeService.ListEmployeeAsync();
 
             return _mapper.Map<List<Domain.Aggregates.Employee.Entities.Employee>, List<EmployeeDto>>(item);
+        }
+
+        public async Task<EmployeeDto> UpdateEmployeeAsync(string id, EmployeeDto employeeDto)
+        {
+            var itemDomain = _mapper.Map<EmployeeDto, Domain.Aggregates.Employee.Entities.Employee>(employeeDto);
+
+            var itemUpdated = await _employeeService.UpdateEmployeeAsync(id, itemDomain);
+
+            return _mapper.Map<Domain.Aggregates.Employee.Entities.Employee, EmployeeDto>(itemUpdated);
         }
     }
 }

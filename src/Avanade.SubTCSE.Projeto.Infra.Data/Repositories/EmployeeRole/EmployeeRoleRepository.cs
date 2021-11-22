@@ -4,7 +4,9 @@ using Avanade.SubTCSE.Projeto.Infra.Data.Repositories.Base;
 
 namespace Avanade.SubTCSE.Projeto.Infra.Data.Repositories.EmployeeRole
 {
-    public class EmployeeRoleRepository : BaseRepository<Domain.Aggregates.EmployeeRole.Entities.EmployeeRole, string>, IEmployeeRoleRepository
+    public class EmployeeRoleRepository :
+        BaseRepository<Domain.Aggregates.EmployeeRole.Entities.EmployeeRole, string>,
+        IEmployeeRoleRepository
     {
         public EmployeeRoleRepository(IMongoDBContext mongoDBContext) : base(mongoDBContext, "employeeRole")
         {
