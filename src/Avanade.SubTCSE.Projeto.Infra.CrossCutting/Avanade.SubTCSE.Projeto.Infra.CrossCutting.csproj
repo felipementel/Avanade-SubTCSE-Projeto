@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Avanade.SubTCSE.Projeto.Application\Avanade.SubTCSE.Projeto.Application.csproj" />
-    <ProjectReference Include="..\Avanade.SubTCSE.Projeto.Infra.Data\Avanade.SubTCSE.Projeto.Infra.Database.csproj" />
+    <ProjectReference Include="..\Avanade.SubTCSE.Projeto.Infra.Database\Avanade.SubTCSE.Projeto.Infra.Database.csproj" />
   </ItemGroup>
 
 </Project>
