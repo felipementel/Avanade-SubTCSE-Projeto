@@ -13,9 +13,9 @@ using Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Interfaces.Services
 using Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services;
 using Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Validators;
 using Avanade.SubTCSE.Projeto.Domain.Base.Repository.MongoDB;
-using Avanade.SubTCSE.Projeto.Infra.Data.Repositories.Base.MongoDB;
-using Avanade.SubTCSE.Projeto.Infra.Data.Repositories.Employee;
-using Avanade.SubTCSE.Projeto.Infra.Data.Repositories.EmployeeRole;
+using Avanade.SubTCSE.Projeto.Infra.Database.Repositories.Base.MongoDB;
+using Avanade.SubTCSE.Projeto.Infra.Database.Repositories.Employee;
+using Avanade.SubTCSE.Projeto.Infra.Database.Repositories.EmployeeRole;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 

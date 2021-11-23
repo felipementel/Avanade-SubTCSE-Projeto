@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
 
-namespace Avanade.SubTCSE.Projeto.Infra.Data.Maps.EmployeeRole
+namespace Avanade.SubTCSE.Projeto.Infra.Database.Maps.EmployeeRole
 {
     public static class EmployeeRoleMap
     {
@@ -14,7 +15,8 @@ namespace Avanade.SubTCSE.Projeto.Infra.Data.Maps.EmployeeRole
 
                 map
                 .MapMember(er => er.RoleName)
-                .SetElementName("roleName");
+                .SetElementName("roleName")
+                .SetSerializer(new StringSerializer(MongoDB.Bson.BsonType.String));
             });
         }
     }

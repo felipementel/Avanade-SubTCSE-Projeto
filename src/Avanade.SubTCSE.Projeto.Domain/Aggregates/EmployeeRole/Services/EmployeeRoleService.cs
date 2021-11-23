@@ -60,11 +60,28 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
 
         public async Task<Entities.EmployeeRole> UpdateEmployeeRoleAsync(string id, Entities.EmployeeRole employeeRole)
         {
+            var validated = await _validations.ValidateAsync(employeeRole, opt =>
+            {
+                opt.IncludeRuleSets("update");
+            });
+
+            employeeRole.ValidationResult = validated;
+
+            if (!validated.IsValid)
+            {
+                return employeeRole;
+            }
+
             var item = await _employeeRoleRepository.FindByIdAsync(id);
 
             if (item is not null)
             {
-                var newItem = item with { RoleName = employeeRole.RoleName };
+                var newItem = item with 
+                {
+                    RoleName = employeeRole.RoleName, 
+                    
+                    ValidationResult = employeeRole.ValidationResult
+                };
 
                 await _employeeRoleRepository.UpdateAsync(newItem);
 

@@ -1,10 +1,11 @@
 # ❯ docker-compose -f .\docker-compose.yaml up --build
+# connect: http://localhost:9031/ | user: avanade-user psw: Abcd1234%
 
-version: '3.8'
+version: '3.9'
 
 services:
   mongo:
-    image: mongo:5.0.1-focal
+    image: mongo:5.0.4-focal
     restart: always
     container_name: mongo-avanade
     environment:
@@ -14,7 +15,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-       - /mnt/c/temp/mongo2:/data/db
+       - /mnt/c/temp/mongo3:/data/db
     networks: 
       - mongo-compose-network
     

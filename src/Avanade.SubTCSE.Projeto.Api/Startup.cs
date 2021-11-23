@@ -1,6 +1,6 @@
 using Avanade.SubTCSE.Projeto.Api.FilterType;
 using Avanade.SubTCSE.Projeto.Infra.CrossCutting;
-using Avanade.SubTCSE.Projeto.Infra.Data.Maps.Setup;
+using Avanade.SubTCSE.Projeto.Infra.Database.Maps.Setup;
 using HealthChecks.UI.Client;
 using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
 using Microsoft.AspNetCore.Builder;
@@ -19,7 +19,6 @@ using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Avanade.SubTCSE.Projeto.Infra.CrossCutting;
 
 namespace Avanade.SubTCSE.Projeto.Api
 {
@@ -39,20 +38,20 @@ namespace Avanade.SubTCSE.Projeto.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddControllers(config => 
+                .AddControllers(config =>
                 {
                     config.Filters.Add<ExceptionFilter>();
                     config.RequireHttpsPermanent = true;
                 })
-                .AddJsonOptions(options => 
+                .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                    options.JsonSerializerOptions.IgnoreNullValues = false;
+                    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                     options.JsonSerializerOptions.WriteIndented = true;
                     options.JsonSerializerOptions.AllowTrailingCommas = false;
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 })
-                .ConfigureApiBehaviorOptions(options => 
+                .ConfigureApiBehaviorOptions(options =>
                 {
                     options.InvalidModelStateResponseFactory = context =>
                     {
@@ -117,21 +116,21 @@ namespace Avanade.SubTCSE.Projeto.Api
                 module.AuthenticationApiKey = _configuration["ApplicationInsights:ApiKey"];
             });
 
-            services
-                .AddHealthChecks();
-                //.AddMongoDb();
+            //services
+            //    .AddHealthChecks();
+            ////.AddMongoDb();
 
-            services
-                .AddHealthChecksUI(setup =>
-               {
-                   setup.SetApiMaxActiveRequests(1);
-               })
-                .AddInMemoryStorage();
+            //services
+            //    .AddHealthChecksUI(setup =>
+            //   {
+            //       setup.SetApiMaxActiveRequests(1);
+            //   })
+            //    .AddInMemoryStorage();
         }
 
         public void Configure(
-            IApplicationBuilder app, 
-            IWebHostEnvironment env, 
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
             IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
@@ -189,19 +188,19 @@ namespace Avanade.SubTCSE.Projeto.Api
 
             app.UseAuthorization();
 
-            app.UseHealthChecks("/hc", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
-            {
-                Predicate = _ => true,
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });
+            //app.UseHealthChecks("/hc", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+            //{
+            //    Predicate = _ => true,
+            //    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            //});
 
-            app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
+            //app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
 
-                endpoints.MapHealthChecks("/hc");
+                //endpoints.MapHealthChecks("/hc");
             });
         }
     }

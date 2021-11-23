@@ -12,6 +12,13 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Validators
                 .NotEmpty()
                 .WithMessage("{PropertyName} can not be empty");
             });
+
+            RuleSet("update", () =>
+            {
+                RuleFor(e => e.RoleName)
+                .NotEmpty()
+                .WithMessage("{PropertyName} can not be empty");
+            });
         }
     }
 }

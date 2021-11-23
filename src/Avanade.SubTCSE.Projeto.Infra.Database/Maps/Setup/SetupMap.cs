@@ -1,6 +1,6 @@
-﻿using Avanade.SubTCSE.Projeto.Infra.Data.Maps.Base;
+﻿using Avanade.SubTCSE.Projeto.Infra.Database.Maps.Base;
 
-namespace Avanade.SubTCSE.Projeto.Infra.Data.Maps.Setup
+namespace Avanade.SubTCSE.Projeto.Infra.Database.Maps.Setup
 {
     public static class SetupMap
     {

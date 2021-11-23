@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
-namespace Avanade.SubTCSE.Projeto.Infra.Data.Repositories.Base.MongoDB
+namespace Avanade.SubTCSE.Projeto.Infra.Database.Repositories.Base.MongoDB
 {
     public class MongoDBContext : IMongoDBContext
     {

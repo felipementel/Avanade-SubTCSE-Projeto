@@ -26,7 +26,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
             _employeeRoleAppService = employeeRoleAppService;
         }
 
-        [HttpGet("EmployeeRole")]
+        [HttpGet("")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -43,16 +43,16 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
             return Ok(item);
         }
 
-        [HttpGet("EmployeeRole/{id}")]
+        [HttpGet("{id}")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetById(string id)
+        public async Task<IActionResult> GetById(string id, ApiVersion apiVersion)
         {
             var item = await _employeeRoleAppService.GetEmployeeRoleAsync(id);
 
-            if (item != null)
+            if (item == null)
             {
                 return BadRequest();
             }
@@ -60,7 +60,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
             return Ok(item);
         }
 
-        [HttpPost("EmployeeRole")]
+        [HttpPost("")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -80,10 +80,10 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
             {
                 apiVersion = apiVersion.ToString(),
                 id = item.Identificador
-            });
+            }, item);
         }
 
-        [HttpPut("EmployeeRole/{id}")]
+        [HttpPut("{id}")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -103,12 +103,12 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
             return NoContent();
         }
 
-        [HttpDelete("EmployeeRole/{id}")]
+        [HttpDelete("{id}")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> EmployeeRole(string id, ApiVersion apiVersion)
+        public async Task<IActionResult> EmployeeRole(string id)
         {
             await _employeeRoleAppService.DeleteEmployeeRoleAsync(id);
 

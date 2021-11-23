@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization;
 
-namespace Avanade.SubTCSE.Projeto.Infra.Data.Maps.Employee
+namespace Avanade.SubTCSE.Projeto.Infra.Database.Maps.Employee
 {
     public static class EmployeeMap
     {

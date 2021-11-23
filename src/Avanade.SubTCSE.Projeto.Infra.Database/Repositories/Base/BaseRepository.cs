@@ -6,7 +6,7 @@ using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Avanade.SubTCSE.Projeto.Infra.Data.Repositories.Base
+namespace Avanade.SubTCSE.Projeto.Infra.Database.Repositories.Base
 {
     public abstract class BaseRepository<TEntity, Tid>
         : IBaseRepository<TEntity, Tid> where TEntity : BaseEntity<Tid>
@@ -39,7 +39,7 @@ namespace Avanade.SubTCSE.Projeto.Infra.Data.Repositories.Base
 
         public virtual async Task<TEntity> FindByIdAsync(Tid id)
         {
-            FilterDefinition<TEntity> filter = Builders<TEntity>.Filter.Eq(field: "_id", id);
+            FilterDefinition<TEntity> filter = Builders<TEntity>.Filter.Eq(x => x.Id, id);
 
             var item = await _collection.FindAsync(filter: filter);
 

@@ -58,18 +58,32 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Services
 
         public async Task<Entities.Employee> UpdateEmployeeAsync(string id, Entities.Employee employee)
         {
+            var validated = await _validations.ValidateAsync(employee, opt =>
+            {
+                opt.IncludeRuleSets("update");
+            });
+
+            employee.ValidationResult = validated;
+
+            if (!validated.IsValid)
+            {
+                return employee;
+            }
+
             var item = await _employeeRepository.FindByIdAsync(id);
 
             if (item is not null)
             {
-                var newItem = item with
+                var newItem = item with 
                 {
                     FirstName = employee.FirstName,
                     Surname = employee.Surname,
                     Active = employee.Active,
                     Birthday = employee.Birthday,
                     EmployeeRole = employee.EmployeeRole,
-                    Salary = employee.Salary                    
+                    Salary = employee.Salary,
+
+                    ValidationResult = employee.ValidationResult
                 };
 
                 await _employeeRepository.UpdateAsync(newItem);

@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson.Serialization.Serializers;
 
 //docs: https://mongodb.github.io/mongo-csharp-driver/2.0/reference/bson/mapping/
-namespace Avanade.SubTCSE.Projeto.Infra.Data.Maps.Base
+namespace Avanade.SubTCSE.Projeto.Infra.Database.Maps.Base
 {
     public static class BaseEntityMap
     {
