@@ -116,6 +116,11 @@ namespace Avanade.SubTCSE.Projeto.Api
                 module.AuthenticationApiKey = _configuration["ApplicationInsights:ApiKey"];
             });
 
+            services.AddLocalization(opt => 
+            {
+                
+            });
+
             //services
             //    .AddHealthChecks();
             ////.AddMongoDb();
@@ -183,6 +188,15 @@ namespace Avanade.SubTCSE.Projeto.Api
             app.UseResponseCompression();
 
             app.UseHttpsRedirection();
+
+            var cultures = new[] { "pt-BR", "en-US"};
+
+            var localizationOptions = new RequestLocalizationOptions()
+                .SetDefaultCulture(cultures[0])
+                .AddSupportedCultures(cultures);
+
+            app.UseRequestLocalization(localizationOptions);
+
 
             app.UseRouting();
 
