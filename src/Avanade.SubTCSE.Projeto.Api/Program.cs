@@ -34,7 +34,7 @@ namespace Avanade.SubTCSE.Projeto.Api
             {
                 var settings = config.Build();
 
-                if (context.HostingEnvironment.IsDevelopment())
+                if (!context.HostingEnvironment.IsDevelopment())
                 {
                     var keyVaultEndpoint = settings.GetSection("KeyVault:EndPoint").Value;
 
