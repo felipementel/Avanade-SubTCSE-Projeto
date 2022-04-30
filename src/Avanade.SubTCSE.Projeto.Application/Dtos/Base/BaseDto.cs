@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using System.Collections.Generic;
 
 namespace Avanade.SubTCSE.Projeto.Application.Dtos.Base
 {
@@ -6,6 +7,13 @@ namespace Avanade.SubTCSE.Projeto.Application.Dtos.Base
     {
         public string Identificador { get; set; }
 
-        public ValidationResult ValidationResult { get; set; }
+        public DetailInfoDto ValidationResult { get; set; }
+    }
+
+    public class DetailInfoDto
+    {
+        public bool IsValid { get; set; }
+
+        public List<string> Errors { get; set; }
     }
 }

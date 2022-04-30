@@ -2,13 +2,12 @@
 # ❯ docker-compose -f .\docker-compose.yaml down --remove-orphans
 # connect: http://localhost:9031/ | user: avanade-user psw: Abcd1234%
 
-version: '3.9'
+version: '3.1'
 
-services:
-  
+services: 
   
   mongo:
-    image: mongo:5.0.6
+    image: mongo:5.0.8-focal
     restart: always
     container_name: mongo-avanade
     environment:
@@ -18,7 +17,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-       - /mnt/c/temp/mongo3:/data/db
+       - /data/db
     networks: 
       - mongo-compose-network
     

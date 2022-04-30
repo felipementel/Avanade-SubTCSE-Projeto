@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using System.Net;
 using System.Net.Mime;
@@ -25,6 +26,9 @@ namespace Avanade.SubTCSE.Projeto.Api
 {
     public class Startup
     {
+        readonly string _projectCORSLocal = "_projectCORS-Local";
+        readonly string _projectCORSServer = "_projectCORS-Server";
+
         public IConfiguration _configuration { get; }
 
         public IWebHostEnvironment _environment { get; }
@@ -38,6 +42,28 @@ namespace Avanade.SubTCSE.Projeto.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: _projectCORSLocal,
+                    policy =>
+                    {
+                        policy.WithOrigins()
+                            .AllowAnyMethod()
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader();
+                    });
+
+                options.AddPolicy(name: _projectCORSServer,
+                    policy =>
+                    {
+                        policy.WithOrigins()
+                            .WithMethods("PUT", "DELETE", "GET", "PATCH")
+                            .AllowAnyOrigin()
+                            .WithHeaders("treinamento", "full-stack")
+                            .WithHeaders(HeaderNames.AcceptLanguage, "pt-br");
+                    });
+            });
+
             services
                 .AddControllers(config =>
                 {
@@ -69,7 +95,7 @@ namespace Avanade.SubTCSE.Projeto.Api
             {
                 options.ReportApiVersions = true;
                 options.AssumeDefaultVersionWhenUnspecified = true;
-                options.DefaultApiVersion = new ApiVersion(1, 1);
+                options.DefaultApiVersion = new ApiVersion(1, 0);
             })
             .AddVersionedApiExplorer(options =>
             {
@@ -125,9 +151,9 @@ namespace Avanade.SubTCSE.Projeto.Api
                 module.EnableSqlCommandTextInstrumentation = true;
             });
 
-            services.AddLocalization(opt => 
+            services.AddLocalization(opt =>
             {
-                
+
             });
 
             //services
@@ -147,6 +173,49 @@ namespace Avanade.SubTCSE.Projeto.Api
             IWebHostEnvironment env,
             IApiVersionDescriptionProvider provider)
         {
+            
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                //c.RoutePrefix = string.Empty;
+                options.DisplayRequestDuration();
+                options.EnableValidator();
+
+                foreach (var description in provider.ApiVersionDescriptions)
+                {
+                    options.SwaggerEndpoint(
+                        $"/swagger/{description.GroupName}/swagger.json",
+                        description.GroupName.ToUpperInvariant());
+                }
+            });
+
+            app.UseResponseCompression();
+
+            app.UseHttpsRedirection();
+
+            var cultures = new[] { "pt-BR", "en-US" };
+
+            var localizationOptions = new RequestLocalizationOptions()
+                .SetDefaultCulture(cultures[0])
+                .AddSupportedCultures(cultures);
+
+            app.UseRequestLocalization(localizationOptions);
+
+            app.UseRouting();
+
+            app.UseCors(policyName: _projectCORSLocal);
+
+            app.UseAuthorization();
+
+            //app.UseHealthChecks("/hc", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+            //{
+            //    Predicate = _ => true,
+            //    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            //});
+
+            //app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -175,53 +244,11 @@ namespace Avanade.SubTCSE.Projeto.Api
                     );
             }
 
-            app.UseCors(builder => builder.AllowAnyMethod()
-                                          .AllowAnyOrigin()
-                                          .AllowAnyHeader());
-
-            app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                //c.RoutePrefix = string.Empty;
-                options.DisplayRequestDuration();
-                options.EnableValidator();
-
-                foreach (var description in provider.ApiVersionDescriptions)
-                {
-                    options.SwaggerEndpoint(
-                        $"/swagger/{description.GroupName}/swagger.json",
-                        description.GroupName.ToUpperInvariant());
-                }
-            });
-
-            app.UseResponseCompression();
-
-            app.UseHttpsRedirection();
-
-            var cultures = new[] { "pt-BR", "en-US"};
-
-            var localizationOptions = new RequestLocalizationOptions()
-                .SetDefaultCulture(cultures[0])
-                .AddSupportedCultures(cultures);
-
-            app.UseRequestLocalization(localizationOptions);
-
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            //app.UseHealthChecks("/hc", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
-            //{
-            //    Predicate = _ => true,
-            //    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            //});
-
-            //app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints
+                .MapControllers()
+                .RequireCors(policyName: _projectCORSLocal);
 
                 //endpoints.MapHealthChecks("/hc");
             });

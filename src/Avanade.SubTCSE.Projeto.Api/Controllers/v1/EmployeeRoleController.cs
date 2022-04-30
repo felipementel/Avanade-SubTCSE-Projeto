@@ -27,7 +27,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         }
 
         [HttpGet("")]
-        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -44,7 +44,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         }
 
         [HttpGet("{id}")]
-        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -62,6 +62,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
 
         [HttpPost("")]
         [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
