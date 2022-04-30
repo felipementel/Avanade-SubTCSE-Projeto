@@ -12,7 +12,7 @@ namespace Avanade.SubTCSE.Projeto.Application.AutoMapperConfigs.Profiles.Employe
                  return new Domain.Aggregates.EmployeeRole.Entities.EmployeeRole(
                  ctor.Cargo);
              })
-            .ForAllOtherMembers(i => i.Ignore());
+            .ForAllMembers(i => i.Ignore());
 
             //    .ForCtorParam("roleName", opt => opt.MapFrom(src => src.Cargo))
             //    .ForAllOtherMembers(i => i.Ignore());
@@ -21,7 +21,7 @@ namespace Avanade.SubTCSE.Projeto.Application.AutoMapperConfigs.Profiles.Employe
                 .ForMember(dest => dest.Identificador, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Cargo, opt => opt.MapFrom(src => src.RoleName))
                 .ForMember(dest => dest.ValidationResult, opt => opt.MapFrom(src => src.ValidationResult))
-                .ForAllOtherMembers(i => i.Ignore());
+                .ForAllMembers(i => i.Ignore());
         }
     }
 }

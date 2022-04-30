@@ -17,7 +17,7 @@ namespace Avanade.SubTCSE.Projeto.Application.AutoMapperConfigs.Profiles.Employe
                         ctor.Salario,
                         employeeRole: res.Mapper.Map<Domain.Aggregates.EmployeeRole.Entities.EmployeeRole>(ctor.Cargo));
                     })
-                    .ForAllOtherMembers(i => i.Ignore());
+                    .ForAllMembers(i => i.Ignore());
 
 
             CreateMap<Domain.Aggregates.Employee.Entities.Employee, Dtos.Employee.EmployeeDto>()
@@ -29,7 +29,7 @@ namespace Avanade.SubTCSE.Projeto.Application.AutoMapperConfigs.Profiles.Employe
                 .ForMember(dest => dest.Salario, opt => opt.MapFrom(src => src.Salary))
                 .ForMember(dest => dest.Cargo, opt => opt.MapFrom(src => src.EmployeeRole))
                 .ForMember(dest => dest.ValidationResult, opt => opt.MapFrom(src => src.ValidationResult))
-                .ForAllOtherMembers(i => i.Ignore());
+                .ForAllMembers(i => i.Ignore());
         }
     }
 }

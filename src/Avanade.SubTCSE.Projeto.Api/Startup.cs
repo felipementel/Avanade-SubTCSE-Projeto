@@ -2,6 +2,7 @@ using Avanade.SubTCSE.Projeto.Api.FilterType;
 using Avanade.SubTCSE.Projeto.Infra.CrossCutting;
 using Avanade.SubTCSE.Projeto.Infra.Database.Maps.Setup;
 using HealthChecks.UI.Client;
+using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -97,8 +98,10 @@ namespace Avanade.SubTCSE.Projeto.Api
             services
                 .AddLogging(configs =>
                 {
+                    configs.ClearProviders();
                     configs.AddConfiguration(_configuration.GetSection("Logging"));
                     configs.AddConsole();
+                    configs.AddApplicationInsights();
                     configs.AddDebug();
                 });
 
@@ -108,12 +111,18 @@ namespace Avanade.SubTCSE.Projeto.Api
 
             services.AddApplicationInsightsTelemetry(options =>
             {
+                options.EnableHeartbeat = true;
                 options.ConnectionString = _configuration["ApplicationInsights:ConnectionString"];
             });
 
             services.ConfigureTelemetryModule<QuickPulseTelemetryModule>((module, o) =>
             {
                 module.AuthenticationApiKey = _configuration["ApplicationInsights:ApiKey"];
+            });
+
+            services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>((module, o) =>
+            {
+                module.EnableSqlCommandTextInstrumentation = true;
             });
 
             services.AddLocalization(opt => 

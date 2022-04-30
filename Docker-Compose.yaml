@@ -1,11 +1,14 @@
-# ❯ docker-compose -f .\docker-compose.yaml up --build
+# ❯ docker-compose -f .\docker-compose.yaml up --build -d
+# ❯ docker-compose -f .\docker-compose.yaml down --remove-orphans
 # connect: http://localhost:9031/ | user: avanade-user psw: Abcd1234%
 
 version: '3.9'
 
 services:
+  
+  
   mongo:
-    image: mongo:5.0.4-focal
+    image: mongo:5.0.6
     restart: always
     container_name: mongo-avanade
     environment:
@@ -20,12 +23,13 @@ services:
       - mongo-compose-network
     
   mongo-express:
-    image: mongo-express:0.54.0
+    image: mongo-express:1.0.0-alpha.4
     restart: always
     container_name: mongoexp-avanade
     ports:
       - 9031:8081
     environment:
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true" 
       ME_CONFIG_BASICAUTH_USERNAME: avanade-user
       ME_CONFIG_BASICAUTH_PASSWORD: Abcd1234%
       ME_CONFIG_MONGODB_PORT: 27017
