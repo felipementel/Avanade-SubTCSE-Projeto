@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using System.Collections.Generic;
 
 namespace Avanade.SubTCSE.Projeto.Domain.Aggregates
 {
@@ -6,6 +7,6 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates
     {
         public Tid Id { get; set; }
 
-        public ValidationResult ValidationResult { get; set; }
+        public List<string> Erros { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace Avanade.SubTCSE.Projeto.Infra.Database.Maps.Base
                 .SetSerializer(new StringSerializer().WithRepresentation(MongoDB.Bson.BsonType.ObjectId));
 
                 map
-                .UnmapMember(v => v.ValidationResult);
+                .UnmapMember(v => v.Erros);
             });
         }
     }
