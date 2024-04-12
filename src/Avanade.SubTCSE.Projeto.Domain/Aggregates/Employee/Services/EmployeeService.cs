@@ -3,6 +3,7 @@ using Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Interfaces.Services;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Services
@@ -31,10 +32,9 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Services
                 opt.IncludeRuleSets("new");
             });
 
-            employee.ValidationResult = validated;
-
             if (!validated.IsValid)
             {
+                employee.Erros = validated.Errors.Select(x => x.ErrorMessage).ToList();
                 return employee;
             }
 
@@ -63,10 +63,9 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Services
                 opt.IncludeRuleSets("update");
             });
 
-            employee.ValidationResult = validated;
-
             if (!validated.IsValid)
             {
+                employee.Erros = validated.Errors.Select(x => x.ErrorMessage).ToList();
                 return employee;
             }
 
@@ -83,7 +82,7 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Services
                     EmployeeRole = employee.EmployeeRole,
                     Salary = employee.Salary,
 
-                    ValidationResult = employee.ValidationResult
+                    Erros = employee.Erros
                 };
 
                 await _employeeRepository.UpdateAsync(newItem);
@@ -92,7 +91,6 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Services
             }
             else
             {
-                //TODO: Return Validation Result
                 return employee;
             }
         }

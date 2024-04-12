@@ -1,4 +1,5 @@
-﻿using Avanade.SubTCSE.Projeto.Application.Dtos.EmployeeRole;
+﻿using Asp.Versioning;
+using Avanade.SubTCSE.Projeto.Application.Dtos.EmployeeRole;
 using Avanade.SubTCSE.Projeto.Application.Interfaces.EmployeeRole;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -48,7 +49,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         [ProducesResponseType(typeof(EmployeeRoleDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetById(string id, ApiVersion apiVersion)
+        public async Task<IActionResult> GetById(string id)
         {
             var item = await _employeeRoleAppService.GetEmployeeRoleAsync(id);
 
@@ -67,19 +68,20 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> EmployeeRole(
-            [FromBody] EmployeeRoleDto employeeRoleDto, 
-            ApiVersion apiVersion)
+            [FromBody] EmployeeRoleDto employeeRoleDto)
         {
             var item = await _employeeRoleAppService.AddEmployeeRoleAsync(employeeRoleDto);
 
-            if (!item.ValidationResult.IsValid)
+            if (item.Errors.Any())
             {
-                return BadRequest(string.Join('\n', item.ValidationResult.Errors));
+                return UnprocessableEntity(string.Join('\n', item.Errors));
             }
 
             return CreatedAtAction(nameof(GetById), new
             {
-                apiVersion = apiVersion.ToString(),
+                apiVersion = new ApiVersion(
+                        1,
+                        0),
                 id = item.Identificador
             }, item);
         }
@@ -91,14 +93,13 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> EmployeeRole(
             string id, 
-            [FromBody] EmployeeRoleDto employeeRoleDto,
-            ApiVersion apiVersion)
+            [FromBody] EmployeeRoleDto employeeRoleDto)
         {
             var item = await _employeeRoleAppService.UpdateEmployeeRoleAsync(id, employeeRoleDto);
 
-            if (!item.ValidationResult.IsValid)
+            if (item.Errors.Any())
             {
-                return BadRequest(string.Join('\n', item.ValidationResult.Errors));
+                return UnprocessableEntity(string.Join('\n', item.Errors));
             }
 
             return NoContent();

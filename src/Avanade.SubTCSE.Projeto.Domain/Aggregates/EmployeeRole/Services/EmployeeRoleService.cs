@@ -1,8 +1,11 @@
 ﻿using Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Interfaces.Repositories;
 using Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Interfaces.Services;
 using FluentValidation;
+using SharpCompress.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
@@ -23,18 +26,12 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
 
         public async Task<EmployeeRole.Entities.EmployeeRole> AddEmployeeRoleAsync(EmployeeRole.Entities.EmployeeRole employeeRole)
         {
-            if (_validations == null)
-                throw new ArgumentException($"Não foi informado o validador da classe {nameof(employeeRole)}");
-
-            var validated = await _validations.ValidateAsync(employeeRole, opt =>
-            {
-                opt.IncludeRuleSets("new");
-            });
-
-            employeeRole.ValidationResult = validated;
+            var validated = await _validations.ValidateAsync(employeeRole,
+                options => options.IncludeRuleSets("new"));
 
             if (!validated.IsValid)
             {
+                employeeRole.Erros = validated.Errors.Select(x => x.ErrorMessage).ToList();
                 return employeeRole;
             }
 
@@ -60,27 +57,23 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
 
         public async Task<Entities.EmployeeRole> UpdateEmployeeRoleAsync(string id, Entities.EmployeeRole employeeRole)
         {
-            var validated = await _validations.ValidateAsync(employeeRole, opt =>
-            {
-                opt.IncludeRuleSets("update");
-            });
-
-            employeeRole.ValidationResult = validated;
+            var validated = await _validations.ValidateAsync(employeeRole,
+                options => options.IncludeRuleSets("update"));
 
             if (!validated.IsValid)
             {
-                return employeeRole;
-            }
+                employeeRole.Erros = validated.Errors.Select(x => x.ErrorMessage).ToList();
+                return employeeRole;            }
 
             var item = await _employeeRoleRepository.FindByIdAsync(id);
 
             if (item is not null)
             {
-                var newItem = item with 
+                var newItem = item with
                 {
-                    RoleName = employeeRole.RoleName, 
-                    
-                    ValidationResult = employeeRole.ValidationResult
+                    RoleName = employeeRole.RoleName,
+
+                    Erros = employeeRole.Erros
                 };
 
                 await _employeeRoleRepository.UpdateAsync(newItem);

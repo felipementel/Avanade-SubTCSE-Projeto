@@ -28,7 +28,7 @@ namespace Avanade.SubTCSE.Projeto.Application.AutoMapperConfigs.Profiles.Employe
                 .ForMember(dest => dest.Ativo, opt => opt.MapFrom(src => src.Active))
                 .ForMember(dest => dest.Salario, opt => opt.MapFrom(src => src.Salary))
                 .ForMember(dest => dest.Cargo, opt => opt.MapFrom(src => src.EmployeeRole))
-                .ForMember(dest => dest.ValidationResult, opt => opt.MapFrom(src => src.ValidationResult))
+                .ForMember(dest => dest.Errors, opt => opt.MapFrom(src => src.Erros))
                 .ForAllMembers(i => i.Ignore());
         }
     }

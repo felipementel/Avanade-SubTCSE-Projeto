@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Avanade.SubTCSE.Projeto.Application.Dtos.Base
 {
@@ -7,13 +8,7 @@ namespace Avanade.SubTCSE.Projeto.Application.Dtos.Base
     {
         public string Identificador { get; set; }
 
-        public DetailInfoDto ValidationResult { get; set; }
-    }
-
-    public class DetailInfoDto
-    {
-        public bool IsValid { get; set; }
-
-        public List<string> Errors { get; set; }
+        [JsonIgnore]
+        public List<string> Errors { get; set; } = new List<string>();
     }
 }
