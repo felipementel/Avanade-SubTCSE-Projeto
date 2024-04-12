@@ -1,12 +1,11 @@
-# docker-compose -f mongodb.yml up -d
-# docker-compose -f mongodb.yml down --remove-orphans
+# docker-compose -f docker-infra.yml up -d
+# docker-compose -f docker-infra.yml down --remove-orphans
 
-version: '3.1'
+version: '3.8'
 
 services:
-
   mongodb:
-    image: mongo:5.0.6
+    image: mongo:7.0.7
     container_name: mongodb-curso
     restart: always
     ports:
@@ -15,23 +14,29 @@ services:
       - /data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: abc1234
+      MONGO_INITDB_ROOT_PASSWORD: Abc12345678
+    networks:
+      - rede-net
 
   mongo-express:
-    image: mongo-express:1.0.0-alpha.4
-    container_name: mongo-express-felipe
+    image: mongo-express:1.0.2-20
+    container_name: mongo-express-curso
     restart: always
     depends_on:
       - mongodb
     ports:
       - 8081:8081
     environment:
-      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true" 
-      # ME_CONFIG_BASICAUTH_USERNAME: mongoexpress-user
-      # ME_CONFIG_BASICAUTH_PASSWORD: mongoexpress-pass
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: 'true'
+      ME_CONFIG_BASICAUTH_USERNAME: mongoexpress-user
+      ME_CONFIG_BASICAUTH_PASSWORD: mongoexpress-pass
       ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_OPTIONS_EDITORTHEME: "ambiance"
-      ME_CONFIG_SITE_BASEURL: "/"
+      ME_CONFIG_OPTIONS_EDITORTHEME: 'ambiance'
+      ME_CONFIG_SITE_BASEURL: '/'
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: abc1234
-      ME_CONFIG_MONGODB_URL: mongodb://root:abc1234@mongodb:27017/
+      ME_CONFIG_MONGODB_ADMINPASSWORD: Abc12345678
+      ME_CONFIG_MONGODB_URL: mongodb://root:Abc12345678@mongodb-curso:27017/
+
+networks:
+  rede-net:
+    driver: bridge
