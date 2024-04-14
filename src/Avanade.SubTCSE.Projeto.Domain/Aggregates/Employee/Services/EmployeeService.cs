@@ -73,7 +73,7 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.Employee.Services
 
             if (item is not null)
             {
-                var newItem = item with 
+                var newItem = item with
                 {
                     FirstName = employee.FirstName,
                     Surname = employee.Surname,

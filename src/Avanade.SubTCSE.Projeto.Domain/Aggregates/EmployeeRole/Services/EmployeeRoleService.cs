@@ -1,10 +1,7 @@
 ﻿using Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Interfaces.Repositories;
 using Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Interfaces.Services;
 using FluentValidation;
-using SharpCompress.Common;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -63,7 +60,8 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
             if (!validated.IsValid)
             {
                 employeeRole.Erros = validated.Errors.Select(x => x.ErrorMessage).ToList();
-                return employeeRole;            }
+                return employeeRole;
+            }
 
             var item = await _employeeRoleRepository.FindByIdAsync(id);
 
@@ -72,7 +70,6 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
                 var newItem = item with
                 {
                     RoleName = employeeRole.RoleName,
-
                     Erros = employeeRole.Erros
                 };
 
@@ -82,7 +79,7 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
             }
             else
             {
-                //TODO: Return Validation Result
+                employeeRole.Erros = new List<string> { "Employee role not found." };
                 return employeeRole;
             }
         }

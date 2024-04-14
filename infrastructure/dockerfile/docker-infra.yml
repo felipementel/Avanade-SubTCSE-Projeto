@@ -4,9 +4,9 @@
 version: '3.8'
 
 services:
-  mongodb:
-    image: mongo:7.0.7
-    container_name: mongodb-curso
+  mongodb-curso-sn:
+    image: mongo:7.0.8
+    container_name: mongodb-cursocn
     restart: always
     ports:
       - 27017:27017
@@ -18,24 +18,27 @@ services:
     networks:
       - rede-net
 
-  mongo-express:
+  mongo-express-sn:
     image: mongo-express:1.0.2-20
-    container_name: mongo-express-curso
+    container_name: mongoexpress-cursocn
     restart: always
     depends_on:
-      - mongodb
+      - mongodb-curso-sn
     ports:
-      - 8081:8081
+      - 8001:8081
     environment:
       ME_CONFIG_MONGODB_ENABLE_ADMIN: 'true'
+      ME_CONFIG_MONGODB_SERVER: mongodb-cursocn
       ME_CONFIG_BASICAUTH_USERNAME: mongoexpress-user
       ME_CONFIG_BASICAUTH_PASSWORD: mongoexpress-pass
       ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_OPTIONS_EDITORTHEME: 'ambiance'
+      ME_CONFIG_OPTIONS_EDITORTHEME: 'dracula'
       ME_CONFIG_SITE_BASEURL: '/'
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: Abc12345678
-      ME_CONFIG_MONGODB_URL: mongodb://root:Abc12345678@mongodb-curso:27017/
+      ME_CONFIG_MONGODB_URL: mongodb://root:Abc12345678@mongodb-cursocn:27017/
+    networks:
+      - rede-net
 
 networks:
   rede-net:
