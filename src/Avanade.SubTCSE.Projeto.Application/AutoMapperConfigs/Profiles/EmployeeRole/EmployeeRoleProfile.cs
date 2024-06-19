@@ -11,11 +11,7 @@ namespace Avanade.SubTCSE.Projeto.Application.AutoMapperConfigs.Profiles.Employe
              {
                  return new Domain.Aggregates.EmployeeRole.Entities.EmployeeRole(
                  ctor.Cargo);
-             })
-            .ForAllMembers(i => i.Ignore());
-
-            //    .ForCtorParam("roleName", opt => opt.MapFrom(src => src.Cargo))
-            //    .ForAllOtherMembers(i => i.Ignore());
+             });
 
             CreateMap<Domain.Aggregates.EmployeeRole.Entities.EmployeeRole, Dtos.EmployeeRole.EmployeeRoleDto>()
                 .ForMember(dest => dest.Identificador, opt => opt.MapFrom(src => src.Id))
