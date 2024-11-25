@@ -92,7 +92,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> EmployeeRole(
-            string id, 
+            string id,
             [FromBody] EmployeeRoleDto employeeRoleDto)
         {
             var item = await _employeeRoleAppService.UpdateEmployeeRoleAsync(id, employeeRoleDto);

@@ -3,10 +3,10 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
-  
+
 env:
   imageName: avanade.estudo.dotnetmongo
-  dotnetVersion: 8.x
+  dotnetVersion: 9.x
   csprojFolder: ./src/Avanade.SubTCSE.Projeto.Api/Avanade.SubTCSE.Projeto.Api.csproj
 
 jobs:
@@ -67,7 +67,7 @@ jobs:
           dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
       - name: ReportGenerator
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.2.1
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
         with:
           reports: 'coverage.xml'
           targetdir: 'coveragereport'

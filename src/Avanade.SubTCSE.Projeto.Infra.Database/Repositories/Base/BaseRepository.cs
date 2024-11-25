@@ -48,7 +48,7 @@ namespace Avanade.SubTCSE.Projeto.Infra.Database.Repositories.Base
 
         public virtual async Task<List<TEntity>> FindAllAsync()
         {
-            var all = await _collection.FindAsync(filter: new BsonDocument());
+            var all = await _collection.FindAsync(Builders<TEntity>.Filter.Empty);
 
             return await all.ToListAsync();
         }

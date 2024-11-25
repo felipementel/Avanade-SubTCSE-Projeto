@@ -25,7 +25,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers.Test
                 Text = _stringLocalizer["TestMsg"].Value,
                 DateTime_Now = DateTime.Now,
                 DateTime_Now_ToUniversalTime = DateTime.Now.ToUniversalTime(),
-                DateTime_UtcNow = DateTime.UtcNow                
+                DateTime_UtcNow = DateTime.UtcNow
             });
         }
     }
