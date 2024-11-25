@@ -28,19 +28,18 @@ namespace Avanade.SubTCSE.Projeto.Api.Swagger
 
         private static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
         {
-            var text = new StringBuilder("API para treinamento com .NET 8 e MongoDB");
+            var text = new StringBuilder("API para treinamento com .NET 9 e MongoDB");
 
             var info = new OpenApiInfo()
             {
-                Title = "Avanade.SubTCSE.Projeto.Api .NET 8",
+                Title = "Avanade.SubTCSE.Projeto.Api .NET 9",
                 Version = description.ApiVersion.ToString(),
                 Description = $"WebApi criada para treinamento na Avanade v{Assembly.GetExecutingAssembly().GetName().Version}",
                 Contact = new OpenApiContact()
                 {
                     Email = "admin@felipementel.dev.br",
                     Name = "Felipe Augusto"
-                },
-
+                }
             };
 
             IsDeprecated(description, text);

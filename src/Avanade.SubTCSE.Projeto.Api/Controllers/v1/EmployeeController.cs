@@ -3,10 +3,8 @@ using Avanade.SubTCSE.Projeto.Application.Dtos.Employee;
 using Avanade.SubTCSE.Projeto.Application.Interfaces.Employee;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Net.Mime;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Avanade.SubTCSE.Projeto.Api.Controllers.v1

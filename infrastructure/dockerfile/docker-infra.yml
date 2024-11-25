@@ -1,11 +1,9 @@
-# docker-compose -f docker-infra.yml up -d
-# docker-compose -f docker-infra.yml down --remove-orphans
-
-version: '3.8'
+# docker compose -f docker-infra.yml up -d
+# docker compose -f docker-infra.yml down --remove-orphans
 
 services:
   mongodb-curso-sn:
-    image: mongo:7.0.8
+    image: mongo:8.0.3-noble
     container_name: mongodb-cursocn
     restart: always
     ports:
